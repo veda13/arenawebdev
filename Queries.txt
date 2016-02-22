@@ -1,0 +1,18 @@
+Queries:
+
+Select Query:
+Select * from `std_details`;
+Select * from `std_details where `age`='20';
+SELECT * FROM `std_details` ORDER BY `std_id` DESC
+
+Insert Query:
+INSERT INTO `std_details`(`std_id`, `Name`, `Branch`, `Age`, `Gender`, `Date_of_Birth`, `Registered_on`, `Address`)
+VALUES ('678945', 'Sravani', 'Mech', '20', 'Female', '1993-02-24', '2011-06-19 10:20:21', '1-3-4G,Bhavani Nagar')
+
+Update Query;
+UPDATE `std_details` SET `std_id`='8765433',`Name`='Siddharath',`Branch`='Civil',`Age`='20',`Gender`='Male',`Date_of_Birth`='1992-04-22',
+`Registered_on`='2011-05-22 13:05:55',`Address`='Teachers Colony' WHERE std_id='8765433';
+
+Delete Query:
+DELETE FROM `std_details` WHERE `std_id`='666666';
+
