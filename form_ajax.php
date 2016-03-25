@@ -51,6 +51,7 @@
 		<div class="col-md-4 col-sm-3 col-md-offset-4">
 		<br>
 				<input type="button"  class="btn btn-info" value="Get all details" onclick="getall_details()"/>
+
 		</div>
 	</form>
 
@@ -78,7 +79,7 @@
                             	"<tr std_id="+data[0]+ ">"+
                             	"<td>"+data[0]+"</td><td>"+data[1]+"</td><td>"+data[2]+"</td>"+"<td>"+data[3]+"</td>"+
                             	"<td>"+data[4]+"</td><td>"+data[5]+"</td><td>"+data[6]+"</td><td><input type='button' class='btn btn-info pull-right' value='Delete info' onclick='delete_details("+data[0]+")'/><td>"+
-                            	"</td><input type='button' class='btn btn-info pull-right' value='update info' onclick='update_details"+
+                            	"</td><input type='button' class='btn btn-info pull-right' value='update info' onclick='update_details'"+
                             	"("+data[0]+")'/><td>"+
                             	"</tr>"+
                             	"</tbody></table>"+
@@ -101,7 +102,7 @@
                             	"</tbody></table>;"+
       			  				"</div>"+
         						"<div class='modal-footer'>"+
-        			  			"<button type='button' class='btn btn-default' data-dismiss='modal'></button>"+
+        			  			"<button type='button' class='btn btn-default' data-dismiss='modal' value='Update deatails' onclick='update_details'></button>"+
         						"</div>"+
      			    			 "</div>"+
       	
@@ -167,8 +168,10 @@
 	}
 
 	function getall_details(){
+
 			//var std_id_del=$('#std_id_del').val();
-			console.log("testing allinfo");
+
+			console.log("testinguhh allinfo");
 			$.ajax({
 			url: 'all_details_ajax.php',
 			method:'POST',
@@ -176,10 +179,12 @@
 			success:function(data) {
 				console.log(data);
 			data = JSON.parse(data);
+			alert("dev");
+			
 			if(data['status']==1){
 			console.log(data);
 			// $('#'+std_id_del).hide();
-			alert("All student details are displayed");} 
+			alert("All @!@student details are displayed"+data['firstname']+"hi");} 
 			
 			else {alert("Details doesnot exist");}
          }

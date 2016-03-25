@@ -12,8 +12,6 @@ include 'db_config_maps.php';
 <script type="text/javascript">
   var map,marker;
 
- 
-
   function initialize() {
     var mapOptions = {
       center: new google.maps.LatLng(18.0000,79.5800),
@@ -32,51 +30,45 @@ include 'db_config_maps.php';
     }
   }
   function showPosition(position) {
-    $('#displat_lng').html("Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude);
-  
-
-                     marker = new google.maps.Marker({
-                    position: new google.maps.LatLng( position.coords.latitude,position.coords.longitude),
-                    map: map,
-          
-                    title: 'Hello World!'
+      $('#display_lng').html("Latitude: " + position.coords.latitude + 
+      "<br>Longitude: " + position.coords.longitude+"Place: " + position.geolocation.place);
+    
+        marker = new google.maps.Marker({
+        position: new google.maps.LatLng( position.coords.latitude,position.coords.longitude,position.geolocation.place),
+        map: map,
+        title: 'Hello World!'
      });
 
      marker.setDraggable (true);
 
-    
+        var infowindow = new google.maps.InfoWindow({
+          content: "Hello..!!"
+        });
 
-                var infowindow = new google.maps.InfoWindow({
-                    content: "yghjg"
-                });
-
-                google.maps.event.addListener(marker, 'click', function() {
-                  infowindow.open(map,marker);
-                });
+      google.maps.event.addListener(marker, 'click', function() {
+           infowindow.open(map,marker);
+        });
 
      marker.setMap(map);
   }
 
    function getMarkerLocation(){
 
-    var lat = marker.getPosition().lat();
-      var lng = marker.getPosition().lng();
-
-       $('#displat_lng').html("Latitude: " + lat + 
-    "<br>Longitude: " + lng);
-
-
-   }
-    function savePlace()
-    {
       var lat = marker.getPosition().lat();
       var lng = marker.getPosition().lng();
+     // var place = marker.ge
 
+       $('#display_lng').html("Latitude: " + lat + "<br>Longitude: " + lng + "<br>Place:" + place);
+   }
+
+  function savePlace(){
+      var lat = marker.getPosition().lat();
+      var lng = marker.getPosition().lng();
+      var place =marker.geolocation().place();
       $.ajax({
             url: 'saveplace.php',
             method:'POST',
-            data:{'lat':lat,'lng':lng},
+            data:{'lat':lat,'lng':lng,'place':place},
             success:function(data) {
               alert(data);
 
@@ -85,8 +77,6 @@ include 'db_config_maps.php';
     }
 
   google.maps.event.addDomListener(window, 'load', initialize);
-
-
 
 </script>
 
@@ -101,9 +91,9 @@ include 'db_config_maps.php';
   <button onclick="savePlace()"> Save </button>
 
   <div class="col-md-12">
-
+  <br>
    <div  class="col-md-8" id="map_canvas" style="height: 500px">  </div>
-   <div  class="col-md-4"  ><p id="displat_lng"></p></div>
+   <div  class="col-md-4"  ><p id="display_lng"></p></div>
 
 
  </div>

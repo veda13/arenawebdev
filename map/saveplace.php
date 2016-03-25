@@ -1,13 +1,13 @@
 <?php 
   include 'db_config_maps.php';
   ?>
-  
+
   <?php
 
-  $query1="INSERT INTO map_details(mid,lat,lng,place)VALUES('".$_POST['mid']."','".$_POST['lat']."','".$_POST['lng']."','".$_POST['place']."')";
+  $query1="INSERT INTO map_details(`lat`,`lng`,`place`)VALUES('".$_POST['lat']."','".$_POST['lng']."','".$_POST['place']."')";
     $res=mysql_query($query1);
-    $value=mysql_fetch_array($res);
-    if(mysql_num_rows($res)=="1") 
+    
+    if($res=="1") 
     {
     	alert("Data Saved");
     }
